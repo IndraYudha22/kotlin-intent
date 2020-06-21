@@ -1,6 +1,7 @@
 package com.strivere.intentsample
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnMoveActivity : Button
     private lateinit var btnMoveActivityWithData : Button
     private lateinit var btnMoveActivityWithObject : Button
+    private lateinit var btnDialUp : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,10 +21,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnMoveActivity = findViewById(R.id.btn_move_activity)
         btnMoveActivityWithData = findViewById(R.id.btn_move_activity_data)
         btnMoveActivityWithObject = findViewById(R.id.btn_move_activity_object)
+        btnDialUp = findViewById(R.id.btn_dial_number)
 
         btnMoveActivity.setOnClickListener(this)
         btnMoveActivityWithData.setOnClickListener(this)
         btnMoveActivityWithObject.setOnClickListener(this)
+        btnDialUp.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -50,6 +54,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val moveWithObjectIntent = Intent(this@MainActivity, MoveWithObjectActivity::class.java)
                 moveWithObjectIntent.putExtra(MoveWithObjectActivity.EXTRA_PERSON, person)
                 startActivity(moveWithObjectIntent)
+            }
+
+            R.id.btn_dial_number -> {
+                val phoneNumber = "087713246576"
+                val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+                startActivity(dialIntent)
             }
         }
     }
