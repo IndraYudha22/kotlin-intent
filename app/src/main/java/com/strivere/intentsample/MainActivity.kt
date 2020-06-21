@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var btnMoveActivity : Button
     private lateinit var btnMoveActivityWithData : Button
+    private lateinit var btnMoveActivityWithObject : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,9 +18,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btnMoveActivity = findViewById(R.id.btn_move_activity)
         btnMoveActivityWithData = findViewById(R.id.btn_move_activity_data)
+        btnMoveActivityWithObject = findViewById(R.id.btn_move_activity_object)
 
         btnMoveActivity.setOnClickListener(this)
         btnMoveActivityWithData.setOnClickListener(this)
+        btnMoveActivityWithObject.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -34,6 +37,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 moveIntentWithData.putExtra(MoveWithDataActivity.EXTRA_NAME, "Someone")
                 moveIntentWithData.putExtra(MoveWithDataActivity.EXTRA_AGE, 5)
                 startActivity(moveIntentWithData)
+            }
+
+            R.id.btn_move_activity_object -> {
+                val person = Person(
+                    "Indra Yudha",
+                    5,
+                    "indrayudha.ind@gmail.com",
+                    "Bandung"
+                )
+
+                val moveWithObjectIntent = Intent(this@MainActivity, MoveWithObjectActivity::class.java)
+                moveWithObjectIntent.putExtra(MoveWithObjectActivity.EXTRA_PERSON, person)
+                startActivity(moveWithObjectIntent)
             }
         }
     }
